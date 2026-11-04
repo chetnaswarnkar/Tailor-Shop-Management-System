@@ -1,0 +1,142 @@
+TAILOR SHOP MANAGEMENT SYSTEM - EASY WINDOWS SETUP
+====================================================
+
+YOU NEED TO INSTALL ONLY THESE:
+1. JDK 21
+2. MySQL Server 8.x
+3. MySQL Workbench
+4. VS Code
+5. VS Code Extension Pack for Java
+6. Apache Maven 3.9+
+
+The project already contains the Java source code, database SQL, Maven configuration and UI.
+You do NOT need to manually download the MySQL Connector/J .jar; Maven downloads it automatically.
+
+STEP 1 - INSTALL JDK
+--------------------
+Install a JDK 21 distribution (for example Eclipse Temurin 21 or Oracle JDK 21).
+
+Open a NEW Command Prompt:
+    java -version
+    javac -version
+
+Both commands should work.
+
+STEP 2 - INSTALL MYSQL
+----------------------
+Install MySQL Community Server 8.x.
+During installation:
+- remember the root password
+- keep the default port 3306 unless you have a reason to change it
+
+Install MySQL Workbench too.
+
+STEP 3 - CREATE DATABASE
+------------------------
+1. Open MySQL Workbench.
+2. Connect to Local instance.
+3. Open:
+   database/schema.sql
+4. Run the complete file.
+5. It creates:
+   tailor_shop_db
+   users
+   customers
+   measurements
+   orders
+   payments
+
+STEP 4 - SET YOUR MYSQL PASSWORD
+--------------------------------
+Open:
+    src/main/resources/db.properties
+
+Change:
+    DB_PASSWORD=YOUR_MYSQL_PASSWORD
+
+Example:
+    DB_PASSWORD=1234
+
+Do not change DB_URL unless your MySQL port is not 3306.
+
+STEP 5 - INSTALL MAVEN
+----------------------
+Install Apache Maven 3.9+ and add its bin folder to PATH.
+
+Open a NEW Command Prompt and check:
+    mvn -version
+
+You should see Maven and Java version information.
+
+STEP 6 - OPEN IN VS CODE
+------------------------
+1. Extract TailorShopManagementSystem.zip.
+2. Open the extracted folder in VS Code.
+3. Install "Extension Pack for Java" by Microsoft.
+4. Wait for Java/Maven project loading to finish.
+
+STEP 7 - RUN
+------------
+Open VS Code Terminal in the project root and run:
+
+    mvn clean compile
+
+Then:
+
+    mvn exec:java
+
+The login window should open.
+
+LOGIN:
+    Username: admin
+    Password: admin123
+
+STEP 8 - FIRST TEST
+-------------------
+After login:
+- Dashboard should open.
+- Customers page lets you add customers.
+- Measurements page stores measurements.
+- Orders page creates orders.
+- Payments page records payments.
+- Delivery Tracker shows smart reminders.
+
+SMART REMINDER TEST
+-------------------
+To test the innovation quickly:
+1. Add a customer.
+2. Create an order.
+3. Set delivery date to today's date.
+4. Open Dashboard.
+5. You should see a "DUE TODAY" reminder.
+
+For an overdue reminder, use a delivery date before today.
+
+COMMON ERRORS
+-------------
+A) "mvn is not recognized"
+   Maven is not installed or PATH was not refreshed.
+   Install Maven, close VS Code, reopen it, then run:
+       mvn -version
+
+B) "Access denied for user root"
+   The MySQL password in db.properties is wrong.
+   Replace DB_PASSWORD with the exact MySQL root password.
+
+C) "Communications link failure"
+   MySQL Server is not running, or the port is different.
+   Start MySQL80 from Windows Services and check port 3306.
+
+D) "Unknown database tailor_shop_db"
+   Run database/schema.sql in MySQL Workbench.
+
+E) Red errors in VS Code immediately after opening
+   Wait for Java/Maven project loading. Then run:
+       mvn clean compile
+
+IMPORTANT
+---------
+This is a college-project starter application. It is designed to be easy to run and extend.
+It uses a simple demo password stored in MySQL. For real production software, use secure password hashing and environment variables/secrets.
+
+Never upload your real MySQL password to GitHub.
